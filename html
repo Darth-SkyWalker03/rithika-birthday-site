@@ -2,129 +2,113 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rithika Quiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz About Us</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(120deg, #ffe3ec, #ffffff);
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .quiz-container {
-      max-width: 600px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: linear-gradient(135deg, #ffe3ec, #ffffff);
+      padding: 30px;
+      color: #333;
     }
 
     h1 {
+      text-align: center;
       color: #e75480;
+      font-size: 2rem;
     }
 
     .question {
-      margin-bottom: 20px;
+      margin: 20px 0;
+      padding: 20px;
+      background-color: #fff;
+      border: 2px solid #e75480;
+      border-radius: 10px;
+    }
+
+    .question h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
     }
 
     .options button {
-      display: block;
-      margin: 8px auto;
-      padding: 10px 20px;
-      border: none;
+      margin: 5px;
+      padding: 10px 15px;
+      border: 1px solid #e75480;
+      background-color: #ffe3ec;
       border-radius: 8px;
-      background-color: #e75480;
-      color: white;
       cursor: pointer;
-      font-size: 1rem;
     }
 
     .options button:disabled {
-      background-color: #ccc;
+      background-color: #f1f1f1;
       cursor: default;
-    }
-
-    .feedback {
-      font-style: italic;
-      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="quiz-container">
-    <h1>How well do you know Rishab?</h1>
+  <h1>Quiz About Us</h1>
 
-    <div class="question">
-      <p>1. What does Rishab do that annoys Rithika the most?</p>
-      <div class="options">
-        <button onclick="handleAnswer(this)">Stop paying attention</button>
-        <button onclick="handleAnswer(this)">Keep cutting her when she is talking</button>
-        <button onclick="handleAnswer(this)">Call her mean</button>
-        <button onclick="handleAnswer(this)">Not giving her attention when she is bored</button>
-      </div>
-      <p class="feedback"></p>
+  <div class="question">
+    <h2>1. What does Rishab do when Rithika is annoyed?</h2>
+    <div class="options">
+      <button onclick="lockAnswer(this)">Stop paying attention</button>
+      <button onclick="lockAnswer(this)">Keep cutting her when she is talking</button>
+      <button onclick="lockAnswer(this)">Call her mean</button>
+      <button onclick="lockAnswer(this)">Not giving her attention when she is bored</button>
     </div>
+  </div>
 
-    <div class="question">
-      <p>2. What's Rishab’s most used word?</p>
-      <div class="options">
-        <button onclick="handleAnswer(this)">bruh</button>
-        <button onclick="handleAnswer(this)">fr fr</button>
-        <button onclick="handleAnswer(this)">gang</button>
-        <button onclick="handleAnswer(this)">beast</button>
-      </div>
-      <p class="feedback"></p>
+  <div class="question">
+    <h2>2. What's one word Rithika picked up from Rishab?</h2>
+    <div class="options">
+      <button onclick="lockAnswer(this)">bruh</button>
+      <button onclick="lockAnswer(this)">fr fr</button>
+      <button onclick="lockAnswer(this)">gang</button>
+      <button onclick="lockAnswer(this)">beast</button>
     </div>
+  </div>
 
-    <div class="question">
-      <p>3. Which nickname does Rishab *actually* use for her?</p>
-      <div class="options">
-        <button onclick="handleAnswer(this)">boo</button>
-        <button onclick="handleAnswer(this)">bb</button>
-        <button onclick="handleAnswer(this)">gugu</button>
-        <button onclick="handleAnswer(this)">gandu</button>
-      </div>
-      <p class="feedback"></p>
+  <div class="question">
+    <h2>3. Nickname Rishab calls Rithika the most?</h2>
+    <div class="options">
+      <button onclick="lockAnswer(this)">boo</button>
+      <button onclick="lockAnswer(this)">bb</button>
+      <button onclick="lockAnswer(this)">gugu</button>
+      <button onclick="lockAnswer(this)">gandu</button>
     </div>
+  </div>
 
-    <div class="question">
-      <p>4. What’s her go-to fake angry phrase?</p>
-      <div class="options">
-        <button onclick="handleAnswer(this)">shut up</button>
-        <button onclick="handleAnswer(this)">whatever</button>
-        <button onclick="handleAnswer(this)">ignore me</button>
-        <button onclick="handleAnswer(this)">i don't like you.</button>
-      </div>
-      <p class="feedback"></p>
+  <div class="question">
+    <h2>4. What is Rishab’s go-to phrase when he pretends to be annoyed?</h2>
+    <div class="options">
+      <button onclick="lockAnswer(this)">shut up</button>
+      <button onclick="lockAnswer(this)">whatever</button>
+      <button onclick="lockAnswer(this)">ignore me</button>
+      <button onclick="lockAnswer(this)">i don’t like you</button>
     </div>
+  </div>
 
-    <div class="question">
-      <p>5. Which food would make her heart melt?</p>
-      <div class="options">
-        <button onclick="handleAnswer(this)">ibaco</button>
-        <button onclick="handleAnswer(this)">momos</button>
-        <button onclick="handleAnswer(this)">ramen</button>
-        <button onclick="handleAnswer(this)">fries</button>
-      </div>
-      <p class="feedback"></p>
+  <div class="question">
+    <h2>5. Favourite food to eat together?</h2>
+    <div class="options">
+      <button onclick="lockAnswer(this)">ibaco</button>
+      <button onclick="lockAnswer(this)">momos</button>
+      <button onclick="lockAnswer(this)">ramen</button>
+      <button onclick="lockAnswer(this)">fries</button>
     </div>
   </div>
 
   <script>
-    function handleAnswer(button) {
-      if (button.disabled) return;
-      button.style.backgroundColor = "#c94f7c";
-      button.disabled = true;
-
-      const parent = button.closest(".question");
-      const buttons = parent.querySelectorAll("button");
-      buttons.forEach(btn => btn.disabled = true);
-
-      const feedback = parent.querySelector(".feedback");
-      feedback.textContent = "Valid choice 😎";
+    function lockAnswer(button) {
+      const buttons = button.parentElement.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        if (btn === button) {
+          btn.style.backgroundColor = "#e75480";
+          btn.style.color = "white";
+        }
+      });
     }
   </script>
 </body>
