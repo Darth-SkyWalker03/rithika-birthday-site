@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday Rithika! 🎉</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="login">
+    <h1>Happy Birthday, Rithika! 🎉</h1>
+    <p>Enter the special password to unlock your birthday surprises:</p>
+    <input type="password" id="passwordInput" placeholder="Enter password" />
+    <button onclick="checkPassword()">Unlock</button>
+    <div id="message"></div>
+  </div>
+
+  <div id="content" style="display:none;">
+    <div id="countdown"></div>
+    <div id="links"></div>
+  </div>
+
+  <script>
+    const PASSWORD = "happybaby05";
+    const passwordInput = document.getElementById('passwordInput');
+    const message = document.getElementById('message');
+    const loginDiv = document.getElementById('login');
+    const contentDiv = document.getElementById('content');
+    const linksDiv = document.getElementById('links');
+    const countdownDiv = document.getElementById('countdown');
+
+    const birthday = new Date("June 5, 2025 00:00:00");
+
+    function checkPassword() {
+      if(passwordInput.value === PASSWORD) {
+        loginDiv.style.display = 'none';
+        contentDiv.style.display = 'block';
+        showCountdown();
+        showLinksByDate();
+      } else {
+        message.textContent = "Oops! Wrong password, try again.";
+      }
+    }
+
+    function showCountdown() {
+      const now = new Date();
+      let diff = birthday - now;
+
+      if(diff <= 0) {
+        countdownDiv.textContent = "Happy Birthday Rithika! 🎉🎂";
+        return;
+      }
+
+      let days = Math.floor(diff / (1000*60*60*24));
+      let hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+      let minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+      let seconds = Math.floor((diff % (1000*60)) / 1000);
+
+      countdownDiv.textContent = `Countdown to your birthday: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+      setTimeout(showCountdown, 1000);
+    }
+
+    function showLinksByDate() {
+      const now = new Date();
+      linksDiv.innerHTML = "";
+
+      function createLink(href, text) {
+        const a = document.createElement('a');
+        a.href = href;
+        a.textContent = text;
+        a.target = "_blank";
+        return a;
+      }
+
+      if(now >= new Date("June 3, 2025")) {
+        linksDiv.appendChild(createLink("heart-game.html", "💖 Catch the Hearts Game"));
+      }
+      if(now >= new Date("June 4, 2025")) {
+        linksDiv.appendChild(createLink("this-or-that.html", "🤔 This or That Game"));
+      }
+      if(now >= new Date("June 5, 2025")) {
+        linksDiv.appendChild(createLink("quiz.html", "🧠 How Well Do You Know Us? Quiz"));
+        linksDiv.appendChild(createLink("letter.html", "💌 Special Letter (Coming Soon)"));
+        linksDiv.appendChild(createLink("video.html", "🎥 Birthday Video (Coming Soon)"));
+        linksDiv.appendChild(createLink("songs.html", "🎵 Birthday Playlist (Coming Soon)"));
+      }
+    }
+  </script>
+</body>
+</html>
