@@ -2,129 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rithika Quiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Rithika</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(120deg, #ffe3ec, #ffffff);
+      background: linear-gradient(135deg, #ffe3ec, #ffffff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       margin: 0;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .quiz-container {
-      max-width: 600px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
       color: #e75480;
     }
 
-    .question {
-      margin-bottom: 20px;
+    input[type="password"] {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 250px;
+      text-align: center;
     }
 
-    .options button {
-      display: block;
-      margin: 8px auto;
+    button {
+      margin-top: 15px;
       padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
+      font-size: 1rem;
       background-color: #e75480;
       color: white;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 1rem;
     }
 
-    .options button:disabled {
-      background-color: #ccc;
-      cursor: default;
+    .hint {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 10px;
     }
 
-    .feedback {
-      font-style: italic;
+    .error {
+      color: red;
       margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="quiz-container">
-    <h1>How well do you know Rishab?</h1>
-
-    <div class="question">
-      <p>1. What does Rishab do that annoys Rithika the most?</p>
-      <div class="options">
-        <button onclick="handleAnswer(this)">Stop paying attention</button>
-        <button onclick="handleAnswer(this)">Keep cutting her when she is talking</button>
-        <button onclick="handleAnswer(this)">Call her mean</button>
-        <button onclick="handleAnswer(this)">Not giving her attention when she is bored</button>
-      </div>
-      <p class="feedback"></p>
-    </div>
-
-    <div class="question">
-      <p>2. What's Rishab’s most used word?</p>
-      <div class="options">
-        <button onclick="handleAnswer(this)">bruh</button>
-        <button onclick="handleAnswer(this)">fr fr</button>
-        <button onclick="handleAnswer(this)">gang</button>
-        <button onclick="handleAnswer(this)">beast</button>
-      </div>
-      <p class="feedback"></p>
-    </div>
-
-    <div class="question">
-      <p>3. Which nickname does Rishab *actually* use for her?</p>
-      <div class="options">
-        <button onclick="handleAnswer(this)">boo</button>
-        <button onclick="handleAnswer(this)">bb</button>
-        <button onclick="handleAnswer(this)">gugu</button>
-        <button onclick="handleAnswer(this)">gandu</button>
-      </div>
-      <p class="feedback"></p>
-    </div>
-
-    <div class="question">
-      <p>4. What’s her go-to fake angry phrase?</p>
-      <div class="options">
-        <button onclick="handleAnswer(this)">shut up</button>
-        <button onclick="handleAnswer(this)">whatever</button>
-        <button onclick="handleAnswer(this)">ignore me</button>
-        <button onclick="handleAnswer(this)">i don't like you.</button>
-      </div>
-      <p class="feedback"></p>
-    </div>
-
-    <div class="question">
-      <p>5. Which food would make her heart melt?</p>
-      <div class="options">
-        <button onclick="handleAnswer(this)">ibaco</button>
-        <button onclick="handleAnswer(this)">momos</button>
-        <button onclick="handleAnswer(this)">ramen</button>
-        <button onclick="handleAnswer(this)">fries</button>
-      </div>
-      <p class="feedback"></p>
-    </div>
-  </div>
+  <h1>Happy Birthday Rithika</h1>
+  <input type="password" id="password" placeholder="Enter the password" />
+  <button onclick="checkPassword()">Enter</button>
+  <div class="hint">(Hint: happybaby05 — v hard don't use this)</div>
+  <div class="error" id="errorMsg"></div>
 
   <script>
-    function handleAnswer(button) {
-      if (button.disabled) return;
-      button.style.backgroundColor = "#c94f7c";
-      button.disabled = true;
-
-      const parent = button.closest(".question");
-      const buttons = parent.querySelectorAll("button");
-      buttons.forEach(btn => btn.disabled = true);
-
-      const feedback = parent.querySelector(".feedback");
-      feedback.textContent = "Valid choice 😎";
+    function checkPassword() {
+      const password = document.getElementById('password').value;
+      if (password === 'happybaby05') {
+        window.location.href = "quiz.html";
+      } else {
+        document.getElementById('errorMsg').textContent = "Wrong password 😤";
+      }
     }
   </script>
 </body>
