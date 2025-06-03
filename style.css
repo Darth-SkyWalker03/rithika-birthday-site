@@ -1,3 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 body {
-    background-color: #fce4ec;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 40px 60px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-weight: 600;
+  color: #880e4f;
+}
+
+p {
+  margin: 10px 0;
+  color: #6a1b9a;
+}
+
+.hint {
+  font-size: 0.85em;
+  color: #aa5299;
+}
+
+input[type="password"] {
+  width: 80%;
+  padding: 10px;
+  font-size: 1em;
+  margin: 15px 0;
+  border: 2px solid #d81b60;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input[type="password"]:focus {
+  border-color: #880e4f;
+}
+
+button {
+  background-color: #d81b60;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #880e4f;
+}
+
+#countdown {
+  margin-top: 20px;
+  font-weight: 600;
+  color: #880e4f;
+}
+
+#game-link a {
+  display: inline-block;
+  margin-top: 25px;
+  font-size: 1.1em;
+  color: #d81b60;
+  text-decoration: none;
+  border: 2px solid #d81b60;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#game-link a:hover {
+  background-color: #d81b60;
+  color: white;
 }
