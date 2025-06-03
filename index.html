@@ -2,60 +2,130 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Rithika's Birthday</title>
-  <link href="style.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rithika Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #ffe3ec, #ffffff);
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .quiz-container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #e75480;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .options button {
+      display: block;
+      margin: 8px auto;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #e75480;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .options button:disabled {
+      background-color: #ccc;
+      cursor: default;
+    }
+    .feedback {
+      font-style: italic;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Happy Birthday Rithika</h1>
-    <p>Enter the password</p>
-    <p class="hint">Hint: happybaby05 (v hard don't use this)</p>
-    <input type="password" id="password" placeholder="Enter password" />
-    <button onclick="checkPassword()">Unlock</button>
-
-    <div id="countdown"></div>
-
-    <div id="game-link" style="display:none;">
-      <p><a href="heart-game.html">Play: Catch the Heart 💖</a></p>
-    </div>
+  <div class="quiz-container">
+    <h1>Quiz About Us 💕</h1>
+    <div id="quiz"></div>
   </div>
 
   <script>
-    function checkPassword() {
-      const input = document.getElementById("password").value;
-      if (input === "happybaby05") {
-        document.getElementById("game-link").style.display = "block";
-      } else {
-        alert("Wrong password! Try again.");
+    const quizData = [
+      {
+        question: "What’s Rishab’s go-to move to annoy you?",
+        options: [
+          "Stop paying attention",
+          "Keep cutting you when you’re talking",
+          "Call you mean",
+          "Not giving you attention when you're bored"
+        ],
+        response: "No matter which one you picked, you know it’s true 😌. Justice for Rishab 2025."
+      },
+      {
+        question: "Which of these words did you totally steal from me?",
+        options: ["bruh", "fr fr", "gang", "beast"],
+        response: "Language thief alert 🚨 You should pay me royalties."
+      },
+      {
+        question: "What’s your favorite nickname from me?",
+        options: ["boo", "bb", "gugu", "gandu"],
+        response: "Cursed options only. You chose violence and affection."
+      },
+      {
+        question: "If I vanish for a few hours, what’s your first reaction?",
+        options: [
+          "You're ignoring me???",
+          "You died?",
+          "You're probably sleeping smh",
+          "BLOCKED."
+        ],
+        response: "Any of these work, but you're still stuck with me 😤."
+      },
+      {
+        question: "What’s your go-to line when you're lowkey wrong?",
+        options: ["shut up", "whatever", "ignore me", "I don’t like you"],
+        response: "Gaslight. Gatekeep. Girlfriend 😮‍💨."
+      },
+      {
+        question: "If we could eat one thing forever, it would be…",
+        options: ["Ibaco", "Momos", "Ramen", "Fries"],
+        response: "A gourmet couple. Only broke emotionally, never in taste 😌."
       }
-    }
+    ];
 
-    // Countdown Timer to June 5, 2025 (change year if needed)
-    const countdownEl = document.getElementById('countdown');
-    const birthdayDate = new Date("June 5, 2025 00:00:00").getTime();
+    const quizDiv = document.getElementById('quiz');
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = birthdayDate - now;
+    quizData.forEach((q, index) => {
+      const qDiv = document.createElement('div');
+      qDiv.className = 'question';
+      const qText = document.createElement('h3');
+      qText.textContent = q.question;
 
-      if (distance < 0) {
-        countdownEl.innerHTML = "Happy Birthday Rithika! 🎉";
-        clearInterval(countdownInterval);
-        return;
-      }
+      const optionsDiv = document.createElement('div');
+      optionsDiv.className = 'options';
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const feedback = document.createElement('div');
+      feedback.className = 'feedback';
 
-      countdownEl.innerHTML = `<p>Countdown to your birthday: <br>
-        ${days}d ${hours}h ${minutes}m ${seconds}s</p>`;
-    }
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.textContent = opt;
+        btn.onclick = () => {
+          optionsDiv.querySelectorAll('button').forEach(b => b.disabled = true);
+          feedback.textContent = q.response;
+        };
+        optionsDiv.appendChild(btn);
+      });
 
-    updateCountdown();
-    const countdownInterval = setInterval(updateCountdown, 1000);
+      qDiv.appendChild(qText);
+      qDiv.appendChild(optionsDiv);
+      qDiv.appendChild(feedback);
+      quizDiv.appendChild(qDiv);
+    });
   </script>
 </body>
 </html>
