@@ -45,23 +45,6 @@
             margin: 20px auto;
             max-width: 300px;
         }
-        #quiz-popup {
-            display: none;
-            background: #ffecec;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px auto;
-        }
-        button {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 1em;
-            cursor: pointer;
-            margin: 10px;
-        }
         #typewriter {
             min-height: 80px;
             border-left: 3px solid #ff6b6b;
@@ -99,17 +82,6 @@
     </div>
     <div id="bottle-message"></div>
 
-    <!-- Quiz -->
-    <button onclick="startQuiz()">Take Our Quiz! ❤️</button>
-    <div id="quiz-popup">
-        <h3>Question <span id="q-number">1</span>:</h3>
-        <p id="question"></p>
-        <button onclick="checkAnswer(1)">A</button>
-        <button onclick="checkAnswer(2)">B</button>
-        <button onclick="checkAnswer(3)">C</button>
-        <p id="quiz-result" style="font-weight:bold;"></p>
-    </div>
-
     <!-- Teaser Photos -->
     <h3 id="teaser-title">Tomorrow's Sneak Peek:</h3>
     <div id="teaser-container">
@@ -138,9 +110,6 @@
             
             // 3. Replace countdown with celebration
             document.getElementById('countdown').innerHTML = "🎂 HAPPY BIRTHDAY! 🎂";
-            
-            // 4. Add confetti (optional)
-            startConfetti();
         }
 
         // ===== COUNTDOWN =====
@@ -188,61 +157,6 @@
             bottleMsg.style.display = 'block';
             bottleMsg.textContent = messages[id-1];
             setTimeout(() => bottleMsg.style.display = 'none', 3000);
-        }
-
-        // ===== QUIZ =====
-        const quiz = [
-            { question: "Where did we first meet?", answer: 1, options: ["Coffee Shop", "Library", "Park"] },
-            { question: "What’s my favorite dessert?", answer: 2, options: ["Ice Cream", "Tiramisu", "Cheesecake"] }
-        ];
-        let currentQ = 0;
-        function startQuiz() {
-            document.getElementById('quiz-popup').style.display = 'block';
-            loadQuestion();
-        }
-        function loadQuestion() {
-            document.getElementById('question').textContent = quiz[currentQ].question;
-            quiz[currentQ].options.forEach((opt, i) => {
-                document.querySelectorAll('#quiz-popup button')[i].textContent = 
-                    `${String.fromCharCode(65+i)}: ${opt}`;
-            });
-            document.getElementById('q-number').textContent = currentQ + 1;
-            document.getElementById('quiz-result').textContent = "";
-        }
-        function checkAnswer(choice) {
-            const resultEl = document.getElementById('quiz-result');
-            if (choice === quiz[currentQ].answer) {
-                resultEl.innerHTML = "Correct! 💖";
-            } else {
-                resultEl.innerHTML = "Nice try! 😘";
-            }
-            currentQ = (currentQ + 1) % quiz.length;
-            setTimeout(loadQuestion, 1500);
-        }
-
-        // ===== CONFETTI (Birthday-only) =====
-        function startConfetti() {
-            // Minimal confetti effect (no external library)
-            const colors = ['#ff6b6b', '#ffb8b8', '#d23369', '#ff8e8e'];
-            setInterval(() => {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
-                confetti.style.width = '10px';
-                confetti.style.height = '10px';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.top = '-10px';
-                confetti.style.borderRadius = '50%';
-                confetti.style.zIndex = '9999';
-                document.body.appendChild(confetti);
-                
-                // Animate
-                const animation = confetti.animate(
-                    [{ top: '-10px' }, { top: '100vh' }],
-                    { duration: 3000 + Math.random() * 5000 }
-                );
-                animation.onfinish = () => confetti.remove();
-            }, 100);
         }
 
         // Initialize
