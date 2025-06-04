@@ -1,75 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Birthday Rithika</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ffe3ec, #ffffff);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: #e75480;
-    }
-
-    input[type="password"] {
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      width: 250px;
-      text-align: center;
-    }
-
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      font-size: 1rem;
-      background-color: #e75480;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .hint {
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: 10px;
-    }
-
-    .error {
-      color: red;
-      margin-top: 10px;
-    }
-  </style>
+    <title>Countdown to Your Surprise!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #fff5f5;
+            text-align: center;
+            padding: 20px;
+        }
+        .countdown {
+            font-size: 2.5em;
+            color: #ff6b6b;
+            margin: 30px 0;
+        }
+        .teaser-img {
+            width: 200px;
+            height: 200px;
+            margin: 15px;
+            border-radius: 10px;
+            filter: blur(5px);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .teaser-img:hover {
+            transform: scale(1.05);
+        }
+        .clue-button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+        .locked-message {
+            border: 2px dashed #ff6b6b;
+            padding: 20px;
+            max-width: 400px;
+            margin: 30px auto;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Happy Birthday Rithika</h1>
-  <input type="password" id="password" placeholder="Enter the password" />
-  <button onclick="checkPassword()">Enter</button>
-  <div class="hint">(Hint: happybaby05 — v hard don't use this)</div>
-  <div class="error" id="errorMsg"></div>
+    <h1>Hey Love! 👀</h1>
+    <p>Your surprise unlocks in...</p>
+    <div class="countdown" id="countdown"></div>
 
-  <script>
-    function checkPassword() {
-      const password = document.getElementById('password').value;
-      if (password === 'happybaby05') {
-        window.location.href = "quiz.html";
-      } else {
-        document.getElementById('errorMsg').textContent = "Wrong password 😤";
-      }
-    }
-  </script>
+    <h2>Tomorrow's Sneak Peek</h2>
+    <div>
+        <img src="photo1.jpg" class="teaser-img" title="Surprise #1">
+        <img src="photo2.jpg" class="teaser-img" title="Surprise #2">
+        <img src="photo3.jpg" class="teaser-img" title="Surprise #3">
+    </div>
+
+    <button class="clue-button" onclick="revealClue()">Get a Clue 🔍</button>
+    <p id="clue" style="display:none;">Check under your coffee mug!</p>
+
+    <div class="locked-message">
+        ✉️ <strong>Sealed Message</strong><br>
+        <em>Available June 5th at 12:00 AM</em>
+    </div>
+
+    <script>
+        // Countdown to June 5
+        function updateCountdown() {
+            const now = new Date();
+            const birthday = new Date(now.getFullYear(), 5, 5); // June 5 (month is 0-indexed)
+            if (now > birthday) birthday.setFullYear(birthday.getFullYear() + 1);
+            
+            const diff = birthday - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById('countdown').innerHTML = 
+                `${hours}h ${mins}m left!`;
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Reveal scavenger hunt clue
+        function revealClue() {
+            document.getElementById('clue').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
