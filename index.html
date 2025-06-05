@@ -1,169 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Your Birthday Surprise! ❤️</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: #fff5f5;
-            text-align: center;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .countdown {
-            font-size: 2.5em;
-            color: #ff6b6b;
-            margin: 30px 0;
-        }
-        .teaser-img {
-            width: 150px;
-            height: 150px;
-            margin: 10px;
-            border-radius: 10px;
-            filter: blur(5px);
-            object-fit: cover;
-            transition: filter 0.5s;
-        }
-        .unblur {
-            filter: none !important;
-        }
-        .bottle {
-            width: 30px;
-            cursor: pointer;
-            margin: 0 10px;
-            transition: transform 0.3s;
-        }
-        .bottle:hover {
-            transform: scale(1.2);
-        }
-        #bottle-message {
-            display: none;
-            background: #f0f8ff;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px auto;
-            max-width: 300px;
-        }
-        #typewriter {
-            min-height: 80px;
-            border-left: 3px solid #ff6b6b;
-            padding-left: 15px;
-            text-align: left;
-            margin: 30px auto;
-            font-style: italic;
-        }
-        .birthday-message {
-            font-size: 1.5em;
-            color: #d23369;
-            margin: 20px 0;
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #fff5f8;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hidden { display: none; }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      max-width: 600px;
+      width: 90%;
+      margin: 20px 0;
+    }
+    button {
+      background-color: #ff7aa5;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e26791;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .hint {
+      margin: 10px 0;
+      background: #ffe6ec;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-    <h1 id="main-title">Hey Love! 👀</h1>
-    <div class="birthday-message" id="birthday-message">
-        HAPPY BIRTHDAY MY LOVE! 🎂🎉<br>
-        <small>(Scroll down for surprises...)</small>
-    </div>
-    <p id="subtitle">Your surprise unlocks in...</p>
-    <div class="countdown" id="countdown"></div>
 
-    <!-- Typewriter Love Letter -->
-    <p id="typewriter"></p>
+  <div id="auth" class="card">
+    <h1>Enter Password</h1>
+    <input type="password" id="passwordInput" placeholder="Enter password" />
+    <button onclick="checkPassword()">Enter</button>
+    <p id="authError" style="color: red;"></p>
+  </div>
 
-    <!-- Bottle Messages -->
-    <h3 id="bottle-title">Click a bottle for a secret message:</h3>
-    <div>
-        <img src="bottle.png" class="bottle" onclick="showMessage(1)">
-        <img src="bottle.png" class="bottle" onclick="showMessage(2)">
-        <img src="bottle.png" class="bottle" onclick="showMessage(3)">
-    </div>
-    <div id="bottle-message"></div>
+  <div id="quiz" class="card hidden">
+    <h2>Trivia Time!</h2>
+    <div id="questions"></div>
+    <button id="submitQuiz" onclick="submitQuiz()">Submit Answers</button>
+    <p id="quizError" style="color: red;"></p>
+  </div>
 
-    <!-- Teaser Photos -->
-    <h3 id="teaser-title">Tomorrow's Sneak Peek:</h3>
-    <div id="teaser-container">
-        <img src="photo1.jpg" class="teaser-img" title="Surprise #1">
-        <img src="photo2.jpg" class="teaser-img" title="Surprise #2">
-    </div>
+  <div id="clues" class="card hidden">
+    <h2>Time for Clues!</h2>
+    <div id="clueText"></div>
+    <button onclick="nextClue()">Next Clue</button>
+  </div>
 
-    <script>
-        // ===== AUTO-BIRTHDAY DETECTION =====
-        function isBirthday() {
-            const today = new Date();
-            return (today.getMonth() === 5 && today.getDate() === 5); // June 5
+  <script>
+    const correctPassword = 'happybaby05';
+    const questions = [
+      {
+        question: 'Where did we first go on a proper date?',
+        options: ['Cafe Zoe', 'The Yellow Chilli', 'Subway', 'Smoke House Deli'],
+        answer: 0
+      },
+      {
+        question: 'What is our favourite movie genre?',
+        options: ['Romantic Comedy', 'Thriller', 'Action', 'Horror'],
+        answer: 1
+      },
+      {
+        question: 'Which side of the bed do you sleep on?',
+        options: ['Left', 'Right', 'Middle', 'Floor lol'],
+        answer: 1
+      },
+      {
+        question: 'What’s our go-to comfort food?',
+        options: ['Pizza', 'Momos', 'Maggi', 'Ice Cream'],
+        answer: 2
+      },
+      {
+        question: 'Who said "I love you" first?',
+        options: ['You', 'Me', 'No one yet', 'Mutually together'],
+        answer: 1
+      },
+    ];
+
+    const clues = [
+      'It’s something that smells nice but isn’t a perfume.',
+      'Time goes by, but this doesn’t get old.',
+      'It’s not red, but you thought about walking in it.',
+      'You won’t hear a sound, but you’ll feel every word.',
+      'Shiny, small, and something for your wrist and ears.',
+      'Sweet, soft, and not what you expected.',
+      'It melts in your mouth but not your heart.'
+    ];
+
+    let currentClue = 0;
+
+    function checkPassword() {
+      const input = document.getElementById('passwordInput').value;
+      if (input === correctPassword) {
+        document.getElementById('auth').classList.add('hidden');
+        renderQuestions();
+        document.getElementById('quiz').classList.remove('hidden');
+      } else {
+        document.getElementById('authError').textContent = 'Wrong password, try again!';
+      }
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById('questions');
+      questions.forEach((q, i) => {
+        const div = document.createElement('div');
+        div.classList.add('question');
+        div.innerHTML = `<p>${q.question}</p>` +
+          q.options.map((opt, j) =>
+            `<label><input type="radio" name="q${i}" value="${j}"> ${opt}</label><br>`
+          ).join('');
+        container.appendChild(div);
+      });
+    }
+
+    function submitQuiz() {
+      let score = 0;
+      questions.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected && parseInt(selected.value) === q.answer) {
+          score++;
         }
+      });
+      if (score >= 3) {
+        document.getElementById('quiz').classList.add('hidden');
+        document.getElementById('clues').classList.remove('hidden');
+        showClue();
+      } else {
+        document.getElementById('quizError').textContent = 'Oops! You need at least 3 correct answers. Try again!';
+      }
+    }
 
-        function activateBirthdayMode() {
-            // 1. Change titles/messages
-            document.getElementById('main-title').textContent = "🎉 IT'S HERE! 🎉";
-            document.getElementById('subtitle').textContent = "Your birthday surprise is ready!";
-            document.getElementById('birthday-message').style.display = 'block';
-            document.getElementById('teaser-title').textContent = "Your Surprises:";
-            
-            // 2. Unblur photos
-            document.querySelectorAll('.teaser-img').forEach(img => {
-                img.classList.add('unblur');
-            });
-            
-            // 3. Replace countdown with celebration
-            document.getElementById('countdown').innerHTML = "🎂 HAPPY BIRTHDAY! 🎂";
-        }
+    function showClue() {
+      const clueBox = document.getElementById('clueText');
+      clueBox.textContent = clues[currentClue];
+    }
 
-        // ===== COUNTDOWN =====
-        function updateCountdown() {
-            if (isBirthday()) {
-                activateBirthdayMode();
-                return;
-            }
-            
-            const now = new Date();
-            const birthday = new Date(now.getFullYear(), 5, 5); // June 5
-            if (now > birthday) birthday.setFullYear(birthday.getFullYear() + 1);
-            
-            const diff = birthday - now;
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            
-            document.getElementById('countdown').innerHTML = 
-                `${hours}h ${mins}m left!`;
-        }
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // ===== TYPEWRITER EFFECT =====
-        const message = isBirthday() ? 
-            "Today is all about YOU! Get ready for love, surprises, and endless joy. I love you! ❤️" : 
-            "Every day with you feels like a celebration. But tomorrow... it’s YOUR day. ❤️";
-        let i = 0;
-        function typeWriter() {
-            if (i < message.length) {
-                document.getElementById("typewriter").textContent += message.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
-            }
-        }
-
-        // ===== BOTTLE MESSAGES =====
-        const messages = [
-            "You’re the reason I smile every day.", 
-            "I’d choose you in every lifetime.", 
-            isBirthday() ? "Today is your day, beautiful! 🎉" : "June 5th is my favorite day because of you."
-        ];
-        function showMessage(id) {
-            const bottleMsg = document.getElementById('bottle-message');
-            bottleMsg.style.display = 'block';
-            bottleMsg.textContent = messages[id-1];
-            setTimeout(() => bottleMsg.style.display = 'none', 3000);
-        }
-
-        // Initialize
-        window.onload = function() {
-            typeWriter();
-            if (isBirthday()) activateBirthdayMode();
-        };
-    </script>
+    function nextClue() {
+      currentClue++;
+      if (currentClue < clues.length) {
+        showClue();
+      } else {
+        document.getElementById('clueText').textContent = "That's all the clues! Now wait for your surprises :)";
+        event.target.style.display = 'none';
+      }
+    }
+  </script>
 </body>
 </html>
